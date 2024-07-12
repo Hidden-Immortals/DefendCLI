@@ -1,0 +1,253 @@
+{
+  "activities": [
+    {
+      "system_activity": "POWERSHELL",
+      "attack_technique": "ENCODED-COMMAND",
+      "Level": "High",
+      "attack_signature": {
+        "process": "powershell.exe",
+        "condition": "e/en/ec/enc/base64",
+        "regex": "(?=.*powershell.exe)(?=.*\\b(e|en|ec|enc|base64)\\b)"
+      }
+    },
+    {
+      "system_activity": "POWERSHELL",
+      "attack_technique": "REMOTE DOWNLOAD",
+      "Level": "High",
+      "attack_signature": {
+        "process": "powershell.exe",
+        "condition": "-nop/-noni/invoke-expression/iex/downloadstring/downloadfile",
+        "regex": "(?=.*powershell.exe)(?=.*\\b(-nop|-noni|invoke-expression|iex|downloadstring|downloadfile)\\b)"
+      }
+    },
+    {
+      "system_activity": "WINDOWS MANAGEMENT INSTRUMENTATION (WMI)",
+      "attack_technique": "LINKAGE PROCESS",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "rundll32.exe/msbuild.exe/powershell.exe/cmd.exe/mshta.exe",
+        "condition": "rundll32.exe/msbuild.exe/powershell.exe/cmd.exe/mshta.exe",
+        "regex": "(?=.*\\b(rundll32\\.exe|msbuild\\.exe|powershell\\.exe|cmd\\.exe|mshta\\.exe)\\b)"
+      }
+    },
+    {
+      "system_activity": "WINDOWS MANAGEMENT INSTRUMENTATION (WMI)",
+      "attack_technique": "UNUSUAL MODULE LOAD",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "wmic.exe",
+        "condition": "create/node:/process/call/format:/jscript.dll/vbscript.dll",
+        "regex": "(?=.*wmic.exe)(?=.*\\b(create|node:|process|call|format:|jscript\\.dll|vbscript\\.dll)\\b)"
+      }
+    },
+    {
+      "system_activity": "WINDOWS MANAGEMENT INSTRUMENTATION (WMI)",
+      "attack_technique": "RECONNAISSANCE",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "wmic.exe",
+        "condition": "ldap/ntdomain/shadowcopy/delete",
+        "regex": "(?=.*wmic.exe)(?=.*\\b(ldap|ntdomain|shadowcopy|delete)\\b)"
+      }
+    },
+    {
+      "system_activity": "WINDOWS MANAGEMENT INSTRUMENTATION (WMI)",
+      "attack_technique": "POWERSHELL EMBEDDED",
+      "Level": "High",
+      "attack_signature": {
+        "process": "powershell.exe",
+        "condition": "invoke-wmimethod/invoke-cimmethod/get-wmiobject/get-ciminstance/wmiclass",
+        "regex": "(?=.*powershell.exe)(?=.*\\b(invoke-wmimethod|invoke-cimmethod|get-wmiobject|get-ciminstance|wmiclass)\\b)"
+      }
+    },
+    {
+      "system_activity": "OS CREDENTIAL DUMPING",
+      "attack_technique": "LSASS MEMORY",
+      "Level": "High",
+      "attack_signature": {
+        "process": "lsass.dmp",
+        "condition": "lsass.dmp",
+        "regex": "(?=.*\\b(lsass\\.dmp)\\b)"
+      }
+    },
+    {
+      "system_activity": "OS CREDENTIAL DUMPING",
+      "attack_technique": "NTDSUTIL",
+      "Level": "High",
+      "attack_signature": {
+        "process": "ntdsutil.exe",
+        "condition": "activate/ifm/create/quit",
+        "regex": "(?=.*ntdsutil.exe)(?=.*\\b(activate|ifm|create|quit)\\b)"
+      }
+    },
+    {
+      "system_activity": "OS CREDENTIAL DUMPING",
+      "attack_technique": "REGISTRY EDITOR",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "reg.exe",
+        "condition": "save/hklm\\sam",
+        "regex": "(?=.*reg\\.exe\\s.*\\b(save|hklm\\sam)\\b)"
+      }
+    },
+    {
+      "system_activity": "OS CREDENTIAL DUMPING",
+      "attack_technique": "MIMIKATZ",
+      "Level": "High",
+      "attack_signature": {
+        "process": "mimikatz.exe",
+        "condition": "lsadump::dcsync/sekurlsa/logonpasswords/pth",
+        "regex": "(?=.*mimikatz.exe)(?=.*\\b(lsadump::dcsync|sekurlsa|logonpasswords|pth)\\b)"
+      }
+    },
+    {
+      "system_activity": "RUNDLL32",
+      "attack_technique": "DLLREGISTER SERVER",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "rundll32.exe",
+        "condition": "DllRegisterServer",
+        "regex": "(?=.*rundll32.exe)(?=.*\\b(DllRegisterServer)\\b)"
+      }
+    },
+    {
+      "system_activity": "RUNDLL32",
+      "attack_technique": "LINKAGE PROCESS",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "rundll32.exe",
+        "condition": "winword.exe/excel.exe/msaccess.exe/lsass.exe/taskeng.exe/winlogon.exe/schtasks.exe/regsvr32.exe/wmiprvse.exe/vsmpwhost.exe",
+        "regex": "(?=.*rundll32.exe)(?=.*\\b(winword\\.exe|excel\\.exe|msaccess\\.exe|lsass\\.exe|taskeng\\.exe|winlogon\\.exe|schtasks\\.exe|regsvr32\\.exe|wmiprvse\\.exe|vsmpwhost\\.exe)\\b)"
+      }
+    },
+    {
+      "system_activity": "RUNDLL32",
+      "attack_technique": "EXPORT FUNCTIONALITIES",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "rundll32.exe",
+        "condition": "MiniDump/#24",
+        "regex": "(?=.*rundll32.exe)(?=.*\\b(MiniDump|#24)\\b)"
+      }
+    },
+    {
+      "system_activity": "RUNDLL32",
+      "attack_technique": "RUNDLL32 INJECTION",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "lsass.exe",
+        "condition": "lsass.exe",
+        "regex": "(?=.*lsass\\.exe)"
+      }
+    },
+    {
+      "system_activity": "INGRESS TOOL TRANSFER",
+      "attack_technique": "CERTUTIL",
+      "Level": "High",
+      "attack_signature": {
+        "process": "certutil.exe",
+        "condition": "urlcache/split",
+        "regex": "(?=.*certutil.exe)(?=.*\\b(urlcache|split)\\b)"
+      }
+    },
+    {
+      "system_activity": "INGRESS TOOL TRANSFER",
+      "attack_technique": "BITSADMIN",
+      "Level": "High",
+      "attack_signature": {
+        "process": "bitsadmin.exe",
+        "condition": "download/transfer",
+        "regex": "(?=.*bitsadmin.exe)(?=.*\\b(download|transfer)\\b)"
+      }
+    },
+    {
+      "system_activity": "INGRESS TOOL TRANSFER",
+      "attack_technique": "PSEXEC",
+      "Level": "High",
+      "attack_signature": {
+        "process": "psexec.exe",
+        "regex": "(?=.*psexec.exe)"
+      }
+    },
+    {
+      "system_activity": "SCHEDULE TASK",
+      "attack_technique": "CERTREQ",
+      "Level": "High",
+      "attack_signature": {
+        "process": "certreq.exe",
+        "condition": "-post/-config/http/get",
+        "regex": "(?=.*certreq.exe)(?=.*\\b(-post|-config|http|get)\\b)"
+      }
+    },
+    {
+      "system_activity": "SCHEDULE TASK",
+      "attack_technique": "SCHTASKS",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "schtasks.exe",
+        "condition": "create/query/change/delete",
+        "regex": "(?=.*schtasks.exe)(?=.*\\b(create|query|change|delete)\\b)"
+      }
+    },
+    {
+      "system_activity": "SCHEDULE TASK",
+      "attack_technique": "AT",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "at.exe",
+        "condition": "every/delete",
+        "regex": "(?=.*at.exe)(?=.*\\b(every|delete)\\b)"
+      }
+    },
+    {
+      "system_activity": "SYSTEM INFORMATION",
+      "attack_technique": "RECONNAISSANCE",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "net.exe/netstat.exe/tasklist.exe/sc.exe/whoami.exe/ps.exe/calc.exe/taskkill.exe/ping.exe/nslookup.exe/ipconfig.exe",
+        "condition": "net.exe/netstat.exe/tasklist.exe/sc.exe/whoami.exe/ps.exe/calc.exe/taskkill.exe/ping.exe/nslookup.exe/ipconfig.exe",
+        "regex": "(?=.*net\\.exe)(?=.*\\b(netstat\\.exe|tasklist\\.exe|sc\\.exe|whoami\\.exe|ps\\.exe|calc\\.exe|taskkill\\.exe|ping\\.exe|nslookup\\.exe|ipconfig\\.exe)\\b)"
+      }
+    },
+    {
+      "system_activity": "SYSTEM INFORMATION",
+      "attack_technique": "SECURITY CONFIGURATION",
+      "Level": "High",
+      "attack_signature": {
+        "process": "bcedit.exe",
+        "condition": "set/export/configure",
+        "regex": "(?=.*bcedit.exe)(?=.*\\b(set|export|configure)\\b)"
+      }
+    },
+    {
+      "system_activity": "SYSTEM INFORMATION",
+      "attack_technique": "FILE SYSTEM OPERATION",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "xcopy.exe/robocopy.exe/del.exe/fc.exe/copy.exe/move.exe/findstr.exe",
+        "condition": "xcopy.exe/robocopy.exe/del.exe/fc.exe/copy.exe/move.exe/findstr.exe",
+        "regex": "(?=.*xcopy\\.exe)(?=.*\\b(robocopy\\.exe|del\\.exe|fc\\.exe|copy\\.exe|move\\.exe|findstr\\.exe)\\b)"
+      }
+    },
+    {
+      "system_activity": "SYSTEM INFORMATION",
+      "attack_technique": "INTERNAL CONNECTION (OFFICE NETWORK)",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "telnet.exe/ftp.exe/mstsc.exe IP_address",
+        "condition": "telnet.exe/ftp.exe/mstsc.exe IP_address",
+        "regex": "(?=.*telnet\\.exe)(?=.*\\b(ftp\\.exe|mstsc\\.exe)\\s.*\\b([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\b)"
+      }
+    },
+    {
+      "system_activity": "SYSTEM INFORMATION",
+      "attack_technique": "EXTERNAL CONNECTION (REVERSE SHELL)",
+      "Level": "High",
+      "attack_signature": {
+        "process": "nc.exe",
+        "condition": "IP_address",
+        "regex": "(?=.*nc\\.exe)(?=.*\\b([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})\\b)"
+      }
+    }
+  ]
+}
