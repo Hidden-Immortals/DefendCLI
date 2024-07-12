@@ -1,19 +1,21 @@
-The GitHub repositry is used for the review process of NDSS 2025.
+📂 Repository Contents
 
-(1) E3-Benchmark.py is the main code for "Evaluation on E3 Benchmark".
+🔍 E3-Benchmark.py
+Main code for "Evaluation on E3 Benchmark".
+⏱️ Real-Time Evaluation.py
+Main code for "Real-Time Evaluation on Commercial EDRs".
+🛠️ detector.py
+Functional library used by both main codes.
+🐧 cmd_linux.json
+Command-line attack signatures for Linux systems.
+🪟 cmd_windows.json
+Command-line attack signatures for Windows systems.
+📊 E3-Results
+Demo experimental results for analysis.
+📈 Real-Time Results
+Demo experimental results for analysis.
+🗂️ Real-Time Evaluation Dataset
+Pentest records collected for evaluation.
+⚠️ Important Notice
 
-(2) Real-Time Evaluation.py is the main code for "Real-Time Evaluation on Commerical EDRs".
-
-(3) detector.py is the functional library for both main codes.
-
-(4) cmd_linux.json is the command-line attack signature for Linux system.
-
-(5) cmd_windows.json is the command-line attack signature for Windows system.
-
-(6) E3-Results is the demo experimental result for analysis.
-
-(7) Real-Time Results is the demo experimental result for analysis.
-
-(8) Real-Time Evaluation Dataset is the pentest records collected.
-
-Attention!!! No Commerical Use. Otherwise,affix legal liability.
+No Commercial Use. Unauthorized commercial use will affix legal liability. 
