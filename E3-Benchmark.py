@@ -456,7 +456,7 @@ if __name__ == '__main__':
     DAG = directed_acyclic_graph(G)  # Convert to directed acyclic graph
     DAG = remove_empty_cmd_subgraphs(DAG)  # Remove empty command line subgraphs
     logging.info('Weight assignment...')
-    G_weighted = weight_assignment(DAG, max_iter=100, num_cores=16)  # 使用16核CPU
+    G_weighted = weight_assignment(DAG, max_iter=100, num_cores=16)  # Use 16-core CPU
     logging.info('Refine weight...')
     re_G_weighted = refine_weight_linux(G_weighted)  # Refine weights
     logging.info('Leiden community detection...')
