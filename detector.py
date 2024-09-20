@@ -254,16 +254,16 @@ def SimHash_Recommender(G, sorted_shortest_paths):
     print(f"Doc2Vec Score: {doc2vec_score}")
     print(f"FastText Score: {fasttext_score}")
 
-    min_score = min(word2vec_score, doc2vec_score, fasttext_score)
+    max_score = max(word2vec_score, doc2vec_score, fasttext_score)
 
-    if min_score == word2vec_score:
-        print("Word2Vec has the minimum score.")
+    if max_score == word2vec_score:
+        print("Word2Vec has the maxium score.")
         best_vectors = word2vec_vectors
-    elif min_score == doc2vec_score:
-        print("Doc2Vec has the minimum score.")
+    elif max_score == doc2vec_score:
+        print("Doc2Vec has the maxium score.")
         best_vectors = doc2vec_vectors
     else:
-        print("FastText has the minimum score.")
+        print("FastText has the maxium score.")
         best_vectors = fasttext_vectors
     return best_vectors, texts
 
