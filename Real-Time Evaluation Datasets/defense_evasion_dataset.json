@@ -1,0 +1,96 @@
+[
+    {
+        "EventID": 10,
+        "UtcTime": "2024-09-15T12:34:56.000Z",
+        "ProcessGUID": "{12345678-1234-5678-1234-567812345678}",
+        "SourceImage": "C:\\Temp\\Micros0ft.exe",
+        "TargetProcessGUID": "{87654321-4321-8765-4321-876543218765}",
+        "TargetImage": "C:\\Windows\\System32\\lsass.exe",
+        "GrantedAccess": "0x1fffff"
+    },
+    {
+        "EventID": 1,
+        "UtcTime": "2024-09-15T12:35:30.000Z",
+        "ProcessGUID": "{34567890-3456-7890-3456-789034567890}",
+        "CommandLine": "powershell.exe -enc aXBjb25maWc=",
+        "ParentProcessGUID": "{87654321-4321-8765-4321-876543218765}",
+        "ParentImage": "C:\\Windows\\System32\\lsass.exe"
+    },
+    {
+        "EventID": 1,
+        "UtcTime": "2024-09-15T12:35:45.000Z",
+        "ProcessGUID": "{45678901-4567-8901-4567-890145678901}",
+        "CommandLine": "ipconfig.exe",
+        "ParentProcessGUID": "{34567890-3456-7890-3456-789034567890}",
+        "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    },
+    {
+        "EventID": 3,
+        "UtcTime": "2024-09-15T12:36:45.000Z",
+        "SourceIpAddress": "10.211.55.10",
+        "SourcePort": 50717,
+        "DestinationIpAddress": "154.26.157.62",
+        "DestinationPort": 4444,
+        "Image": "C:\\Temp\\Micros0ft.exe"
+    },
+    {
+        "EventID": 10,
+        "UtcTime": "2024-09-15T12:34:56.000Z",
+        "ProcessGUID": "{12345678-1234-5678-1234-567812345678}",
+        "SourceImage": "C:\\Temp\\Lockheed_Martin_JobOpportunities.docx",
+        "TargetProcessGUID": "{87654321-4321-8765-4321-876543218765}",
+        "TargetImage": "C:\\Windows\\System32\\mshta.exe",
+        "GrantedAccess": "0x1fffff"
+    },
+    {
+        "EventID": 1,
+        "UtcTime": "2024-09-15T12:35:10.000Z",
+        "ProcessGUID": "{23456789-2345-6789-2345-678923456789}",
+        "CommandLine": "schtasks /create /tn \"WMPlaybackSrv\" /tr \"mshta.exe C:\\WMAuthorization\\WMPlaybackSrv\"",
+        "ParentProcessGUID": "{87654321-4321-8765-4321-876543218765}",
+        "ParentImage": "C:\\Windows\\System32\\mshta.exe"
+    },
+    {
+        "EventID": 3,
+        "UtcTime": "2024-09-15T12:36:45.000Z",
+        "SourceIpAddress": "10.211.55.10",
+        "SourcePort": 50717,
+        "DestinationIpAddress": "154.26.157.62",
+        "DestinationPort": 4444,
+        "Image": "C:\\Windows\\System32\\mshta.exe"
+    },
+    {
+        "EventID": 1,
+        "UtcTime": "2024-09-15T12:34:56.000Z",
+        "ProcessGUID": "{12345678-1234-5678-1234-567812345678}",
+        "CommandLine": "forfiles /p C:\\Mac\\Temp /m *.exe /c \"echo execution from forfiles\"",
+        "ParentProcessGUID": "{12345678-1234-5678-8765-876543210987}",
+        "ParentImage": "C:\\Windows\\System32\\explorer.exe"
+    },
+    {
+        "EventID": 3,
+        "UtcTime": "2024-09-15T12:36:45.000Z",
+        "SourceIpAddress": "10.211.55.10",
+        "SourcePort": 50717,
+        "DestinationIpAddress": "154.26.157.62",
+        "DestinationPort": 4444,
+        "Image": "C:\\Windows\\System32\\forfiles.exe"
+    },
+    {
+        "EventID": 1,
+        "UtcTime": "2024-09-15T12:35:10.000Z",
+        "ProcessGUID": "{23456789-2345-6789-2345-678923456789}",
+        "CommandLine": "pcalua.exe -a C:Mac\\Home\\Downloads\\Micros0ft.exe",
+        "ParentProcessGUID": "{87654321-4321-8765-4321-876543218765}",
+        "ParentImage": "C:\\Windows\\explorer.exe"
+    },
+    {
+        "EventID": 3,
+        "UtcTime": "2024-09-15T12:36:45.000Z",
+        "SourceIpAddress": "10.211.55.10",
+        "SourcePort": 50717,
+        "DestinationIpAddress": "154.26.157.62",
+        "DestinationPort": 4444,
+        "Image": "C:\\Windows\\System32\\pcalua.exe"
+    }
+]

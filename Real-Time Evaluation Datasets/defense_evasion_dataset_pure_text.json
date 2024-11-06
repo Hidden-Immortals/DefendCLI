@@ -1,0 +1,236 @@
+% Process Hollowing and CMD Evasion InfoPath #4
+<Event>
+  <System>
+    <EventID>10</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:34:56.000Z" />
+    <EventRecordID>1</EventRecordID>
+    <Execution ProcessID="456" ThreadID="123" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">Injection</Data>
+    <Data Name="UtcTime">2024-09-15T12:34:56.000Z</Data>
+    <Data Name="SourceProcessGUID">{12345678-1234-5678-1234-567812345678}</Data>
+    <Data Name="SourceProcessId">1010</Data>
+    <Data Name="SourceImage">C:\Temp\Micros0ft.exe</Data>
+    <Data Name="TargetProcessGUID">{87654321-4321-8765-4321-876543218765}</Data>
+    <Data Name="TargetProcessId">660</Data>
+    <Data Name="TargetImage">C:\Windows\System32\lsass.exe</Data>
+    <Data Name="GrantedAccess">0x1fffff</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>1</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:35:30.000Z" />
+    <EventRecordID>2</EventRecordID>
+    <Execution ProcessID="456" ThreadID="1234" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">CommandExecution</Data>
+    <Data Name="UtcTime">2024-09-15T12:35:30.000Z</Data>
+    <Data Name="ProcessGUID">{34567890-3456-7890-3456-789034567890}</Data>
+    <Data Name="ProcessId">1040</Data>
+    <Data Name="Image">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+    <Data Name="CommandLine">powershell.exe -enc aXBjb25maWc=</Data> <!-- Encoded 'ipconfig' -->
+    <Data Name="ParentProcessGUID">{87654321-4321-8765-4321-876543218765}</Data>
+    <Data Name="ParentProcessId">660</Data>
+    <Data Name="ParentImage">C:\Windows\System32\lsass.exe</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>1</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:35:45.000Z" />
+    <EventRecordID>3</EventRecordID>
+    <Execution ProcessID="456" ThreadID="5678" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">IPConfigExecution</Data>
+    <Data Name="UtcTime">2024-09-15T12:35:45.000Z</Data>
+    <Data Name="ProcessGUID">{45678901-4567-8901-4567-890145678901}</Data>
+    <Data Name="ProcessId">1060</Data>
+    <Data Name="Image">C:\Windows\System32\ipconfig.exe</Data>
+    <Data Name="CommandLine">ipconfig.exe</Data>
+    <Data Name="ParentProcessGUID">{34567890-3456-7890-3456-789034567890}</Data>
+    <Data Name="ParentProcessId">1040</Data>
+    <Data Name="ParentImage">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>3</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:36:45.000Z" />
+    <EventRecordID>4</EventRecordID>
+    <Execution ProcessID="789" ThreadID="1234" />
+  </System>
+  <EventData>
+    <Data Name="SourceIpAddress">10.211.55.10</Data>
+    <Data Name="SourcePort">50717</Data>
+    <Data Name="DestinationIpAddress">154.26.157.62</Data>
+    <Data Name="DestinationPort">4444</Data>
+    <Data Name="Image">C:\Temp\Micros0ft.exe</Data>
+  </EventData>
+</Event>
+
+#### LOLBins InfoPath #5:
+
+```xml
+<Event>
+  <System>
+    <EventID>10</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:34:56.000Z" />
+    <EventRecordID>1</EventRecordID>
+    <Execution ProcessID="456" ThreadID="123" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">Injection</Data>
+    <Data Name="UtcTime">2024-09-15T12:34:56.000Z</Data>
+    <Data Name="SourceProcessGUID">{12345678-1234-5678-1234-567812345678}</Data>
+    <Data Name="SourceProcessId">1010</Data>
+    <Data Name="SourceImage">C:\Temp\Lockheed_Martin_JobOpportunities.docx</Data>
+    <Data Name="TargetProcessGUID">{87654321-4321-8765-4321-876543218765}</Data>
+    <Data Name="TargetProcessId">660</Data>
+    <Data Name="TargetImage">C:\Windows\System32\mshta.exe</Data>
+    <Data Name="GrantedAccess">0x1fffff</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>1</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:35:10.000Z" />
+    <EventRecordID>2</EventRecordID>
+    <Execution ProcessID="456" ThreadID="789" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">ScheduledTask</Data>
+    <Data Name="UtcTime">2024-09-15T12:35:10.000Z</Data>
+    <Data Name="ProcessGUID">{23456789-2345-6789-2345-678923456789}</Data>
+    <Data Name="ProcessId">1020</Data>
+    <Data Name="Image">C:\Windows\System32\schtasks.exe</Data>
+    <Data Name="CommandLine">schtasks /create /tn "WMPlaybackSrv" /tr "mshta.exe C:\WMAuthorization\WMPlaybackSrv"</Data>
+    <Data Name="ParentProcessGUID">{87654321-4321-8765-4321-876543218765}</Data>
+    <Data Name="ParentProcessId">660</Data>
+    <Data Name="ParentImage">C:\Windows\System32\mshta.exe</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>3</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:36:45.000Z" />
+    <EventRecordID>3</EventRecordID>
+    <Execution ProcessID="789" ThreadID="1234" />
+  </System>
+  <EventData>
+    <Data Name="SourceIpAddress">10.211.55.10</Data>
+    <Data Name="SourcePort">50717</Data>
+    <Data Name="DestinationIpAddress">154.26.157.62</Data>
+    <Data Name="DestinationPort">4444</Data>
+    <Data Name="Image">C:\Windows\System32\mshta.exe</Data>
+  </EventData>
+</Event>
+
+#### forfiles InfoPath #6:
+
+```xml
+<Event>
+  <System>
+    <EventID>1</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:34:56.000Z" />
+    <EventRecordID>1</EventRecordID>
+    <Execution ProcessID="1234" ThreadID="5678" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">ForfilesExecution</Data>
+    <Data Name="UtcTime">2024-09-15T12:34:56.000Z</Data>
+    <Data Name="ProcessGUID">{12345678-1234-5678-Here is the continued Sysmon log including network information as requested:
+
+```xml
+<Event>
+  <System>
+    <EventID>1</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:34:56.000Z" />
+    <EventRecordID>1</EventRecordID>
+    <Execution ProcessID="1234" ThreadID="5678" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">ForfilesExecution</Data>
+    <Data Name="UtcTime">2024-09-15T12:34:56.000Z</Data>
+    <Data Name="ProcessGUID">{12345678-1234-5678-1234-567812345678}</Data>
+    <Data Name="ProcessId">4321</Data>
+    <Data Name="Image">C:\Windows\System32\forfiles.exe</Data>
+    <Data Name="CommandLine">forfiles /p C:\Mac\Temp /m *.exe /c "echo execution from forfiles"</Data>
+    <Data Name="ParentProcessGUID">{12345678-1234-5678-8765-876543210987}</Data>
+    <Data Name="ParentProcessId">3456</Data>
+    <Data Name="ParentImage">C:\Windows\System32\explorer.exe</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>3</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:36:45.000Z" />
+    <EventRecordID>4</EventRecordID>
+    <Execution ProcessID="789" ThreadID="1234" />
+  </System>
+  <EventData>
+    <Data Name="SourceIpAddress">10.211.55.10</Data>
+    <Data Name="SourcePort">50717</Data>
+    <Data Name="DestinationIpAddress">154.26.157.62</Data>
+    <Data Name="DestinationPort">4444</Data>
+    <Data Name="Image">C:\Windows\System32\forfiles.exe</Data>
+  </EventData>
+</Event>
+
+% Pcalua InfoPath #7
+<Event>
+  <System>
+    <EventID>1</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:35:10.000Z" />
+    <EventRecordID>2</EventRecordID>
+    <Execution ProcessID="5678" ThreadID="9876" />
+  </System>
+  <EventData>
+    <Data Name="RuleName">AbusingPcalua</Data>
+    <Data Name="UtcTime">2024-09-15T12:35:10.000Z</Data>
+    <Data Name="ProcessGUID">{23456789-2345-6789-2345-678923456789}</Data>
+    <Data Name="ProcessId">5678</Data>
+    <Data Name="Image">C:\Windows\System32\pcalua.exe</Data>
+    <Data Name="CommandLine">pcalua.exe -a C:Mac\Home\Downloads\Micros0ft.exe</Data>
+    <Data Name="ParentProcessGUID">{87654321-4321-8765-4321-876543218765}</Data>
+    <Data Name="ParentProcessId">1234</Data>
+    <Data Name="ParentImage">C:\Windows\explorer.exe</Data>
+  </EventData>
+</Event>
+
+<Event>
+  <System>
+    <EventID>3</EventID>
+    <Provider Name="Microsoft-Windows-Sysmon" />
+    <TimeCreated SystemTime="2024-09-15T12:36:45.000Z" />
+    <EventRecordID>4</EventRecordID>
+    <Execution ProcessID="789" ThreadID="1234" />
+  </System>
+  <EventData>
+    <Data Name="SourceIpAddress">10.211.55.10</Data>
+    <Data Name="SourcePort">50717</Data>
+    <Data Name="DestinationIpAddress">154.26.157.62</Data>
+    <Data Name="DestinationPort">4444</Data>
+    <Data Name="Image">C:\Windows\System32\pcalua.exe</Data>
+  </EventData>
+</Event>
