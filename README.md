@@ -1,4 +1,4 @@
-# ⚙️ DEFENDCLI Artifact Evaluation Guide ⚙️
+# ⚙️ DEFENDCLI Artifact Evaluation Guide ⚙️ 
 
 This guide explains how to configure and use the DEFENDCLI tool for specific Artifact Evaluation tasks, primarily targeting the E3 (TRACE, THEIA, CADETS) datasets and the A-series attack scenarios (A1, A2, A3).
 
