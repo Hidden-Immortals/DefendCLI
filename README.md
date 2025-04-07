@@ -1,107 +1,132 @@
-# DEFENDCLI Artifact Evaluation Guide
+# ⚙️ DEFENDCLI Artifact Evaluation Guide ⚙️
 
 This guide explains how to configure and use the DEFENDCLI tool for specific Artifact Evaluation tasks, primarily targeting the E3 (TRACE, THEIA, CADETS) datasets and the A-series attack scenarios (A1, A2, A3).
 
-## Overview
+## 📜 Overview
 
-DEFENDCLI is a tool used for analyzing system events and detecting potential threats. This document focuses on how to modify its code to process different datasets and attack scenarios, explains the rule sets used, and describes how to handle the output results for further analysis.
+DEFENDCLI is a tool designed for analyzing system events to detect potential threats. This document focuses on:
 
-## Prerequisites
+1.  Modifying the DEFENDCLI codebase to process different datasets and attack scenarios.
+2.  Explaining the rule sets used during evaluation.
+3.  Describing how to handle the output results for further analysis.
 
-1.  **DEFENDCLI Codebase:** You need access to the DEFENDCLI source code.
+## ✅ Prerequisites
+
+Before you begin, ensure you have the following:
+
+1.  **DEFENDCLI Codebase:** Access to the DEFENDCLI source code.
 2.  **Datasets:**
-    * For E3 evaluation, ensure the `TRACE`, `THEIA`, or `CADETS` datasets are downloaded and placed in an accessible directory. An example path is `/root/Engagement-3/data/trace`.
-    * For A-series evaluation, ensure the `attack_scenario_1.json`, `attack_scenario_2.json`, `attack_scenario_3.json` files are downloaded and placed in an accessible directory. An example path is `/root/`.
-    * **Note:** You may need to adjust the file paths mentioned in the instructions below based on your actual data storage location.
-3.  **Python Environment:** A Python environment capable of running the DEFENDCLI code is required.
+    * **E3 Datasets (TRACE, THEIA, CADETS):**
+        * Download the required dataset(s).
+        * Place them in an accessible directory.
+        * *Example Path:* `/root/Engagement-3/data/trace`
+    * **A-Series Attack Scenarios (A1, A2, A3):**
+        * Download the `attack_scenario_1.json`, `attack_scenario_2.json`, and `attack_scenario_3.json` files.
+        * Place them in an accessible directory.
+        * *Example Path:* `/root/`
+    > **⚠️ Important:** You **must** adjust the example file paths mentioned in the instructions below to match your actual data storage locations.
+3.  **Python Environment:** A working Python environment capable of executing the DEFENDCLI code.
 
-## Usage Instructions
+## 🚀 Usage Instructions
 
-Different code modifications are needed depending on the type of dataset you intend to evaluate.
+Code modifications are required depending on whether you are evaluating large E3 datasets or specific A-series attack scenario files.
+
+---
 
 ### 1. Evaluating E3 Datasets (TRACE, THEIA, CADETS)
 
-This configuration is used for processing large-scale system trace data from DARPA Engagement 3.
+Use this configuration for processing large-scale system trace data (e.g., from DARPA Engagement 3).
 
-* **Step 1: Modify the `main()` function**
-    * Locate the `main()` function in the code.
-    * Find the line of code that sets the dataset directory path.
-    * Modify it to point to the root directory of the E3 dataset. For example, for the TRACE dataset:
-        ```python
-        # Inside the main() function
-        directory_path = '/root/Engagement-3/data/trace'
-        # !! Important: Please modify '/root/Engagement-3/data/trace' according to your actual data storage path !!
-        ```
+* **Step 1: Modify the `main()` function (Dataset Path)**
+    * Locate the `main()` function in the DEFENDCLI source code.
+    * Find the line that defines the dataset directory path.
+    * Update this path to point to the **root directory** containing the specific E3 dataset files (TRACE, THEIA, or CADETS).
 
-* **Step 2: Modify the `read_focus_data()` function**
+    ```python
+    # Inside the main() function
+
+    # Example for TRACE dataset:
+    directory_path = '/root/Engagement-3/data/trace'
+    # ⬆️ !! Modify this path to your actual dataset location !!
+    ```
+
+* **Step 2: Modify the `read_focus_data()` function (File Filtering)**
     * Locate the `read_focus_data()` function.
-    * Find the line of code used for filtering files, which likely contains a specific filename identifier (e.g., `'ta1-trace-e3-official'`).
-    * Modify this identifier based on the specific dataset you are processing (TRACE, THEIA, or CADETS).
-        * For **TRACE** (official dataset): Filenames usually contain `'ta1-trace-e3-official'`.
-        * For **THEIA**: Change `'ta1-trace-e3-official'` (or another placeholder) in the filter to `'theia'` (or another string that uniquely identifies THEIA data files).
-        * For **CADETS**: Change `'ta1-trace-e3-official'` (or another placeholder) in the filter to `'cadets'` (or another string that uniquely identifies CADETS data files).
+    * Find the line responsible for filtering files within the specified directory. This line likely contains a string used to identify relevant data files (e.g., `'ta1-trace-e3-official'`).
+    * Modify the identifier string based on the dataset you are processing:
+        * **TRACE (Official):** Use an identifier like `'ta1-trace-e3-official'`.
+        * **THEIA:** Change the identifier to a string unique to THEIA files (e.g., `'ta1-theia-e3-official'`, `'theia'`).
+        * **CADETS:** Change the identifier to a string unique to CADETS files (e.g., `'ta1-cadets-e3-official'`, `'cadets'`).
 
-        Example (assuming original code is for TRACE):
-        ```python
-        # Inside the read_focus_data() function
-        # Original code (processing TRACE):
-        files = [os.path.join(directory, f) for f in os.listdir(directory) if
-                 not f.endswith('.gz') and 'ta1-trace-e3-official' in f]
+    ```python
+    # Inside the read_focus_data() function
 
-        # Modified for THEIA (Example):
-        # files = [os.path.join(directory, f) for f in os.listdir(directory) if
-        #          not f.endswith('.gz') and 'ta1-theia-e3-official' in f] # <-- Modify the identifier here
+    # Original code (Example: processing TRACE):
+    files = [os.path.join(directory, f) for f in os.listdir(directory) if
+             not f.endswith('.gz') and 'ta1-trace-e3-official' in f]
 
-        # Modified for CADETS (Example):
-        # files = [os.path.join(directory, f) for f in os.listdir(directory) if
-        #          not f.endswith('.gz') and 'ta1-cadets-e3-official' in f] # <-- Modify the identifier here
-        ```
-    * **Note:** Please adjust the string following `in f` according to the actual file naming convention used in your dataset.
+    # --- Modifications Examples ---
+
+    # Modified for THEIA (Example Identifier):
+    # files = [os.path.join(directory, f) for f in os.listdir(directory) if
+    #          not f.endswith('.gz') and 'ta1-theia-e3-official' in f] # <-- Modify identifier
+
+    # Modified for CADETS (Example Identifier):
+    # files = [os.path.join(directory, f) for f in os.listdir(directory) if
+    #          not f.endswith('.gz') and 'ta1-cadets-e3-official' in f] # <-- Modify identifier
+    ```
+    > **ℹ️ Note:** Carefully check the actual filenames in your downloaded dataset and adjust the identifier string (`'...' in f`) accordingly.
+
+---
 
 ### 2. Evaluating Attack Scenarios (A1, A2, A3)
 
-This configuration is used to process specific attack scenario files in JSON format. You will need to run the tool separately for each scenario.
+Use this configuration to process individual attack scenario JSON files. You need to configure and run DEFENDCLI separately for *each* scenario (A1, A2, A3).
 
-* **Step 1: Modify the `main()` function**
+* **Step 1: Modify the `main()` function (Scenario File Path)**
     * Locate the `main()` function.
-    * Find the line of code that sets the input file path.
-    * Modify it to point to the specific attack scenario JSON file you want to evaluate.
+    * Find the line that defines the input file path (often named `path`).
+    * Modify this path to point directly to the specific attack scenario JSON file you want to evaluate.
 
-        * For Scenario A1:
-            ```python
-            # Inside the main() function
-            path = '/root/attack_scenario_1.json'
-            # !! Important: Please modify '/root/attack_scenario_1.json' according to your actual file storage path !!
-            ```
-        * For Scenario A2:
-            ```python
-            # Inside the main() function
-            path = '/root/attack_scenario_2.json'
-            # !! Important: Please modify '/root/attack_scenario_2.json' according to your actual file storage path !!
-            ```
-        * For Scenario A3:
-            ```python
-            # Inside the main() function
-            path = '/root/attack_scenario_3.json'
-            # !! Important: Please modify '/root/attack_scenario_3.json' according to your actual file storage path !!
-            ```
-    * Before each run of DEFENDCLI, ensure the `path` variable points to the correct scenario file.
+    * **For Scenario A1:**
+        ```python
+        # Inside the main() function
+        path = '/root/attack_scenario_1.json'
+        # ⬆️ !! Modify this path to your actual file location !!
+        ```
+    * **For Scenario A2:**
+        ```python
+        # Inside the main() function
+        path = '/root/attack_scenario_2.json'
+        # ⬆️ !! Modify this path to your actual file location !!
+        ```
+    * **For Scenario A3:**
+        ```python
+        # Inside the main() function
+        path = '/root/attack_scenario_3.json'
+        # ⬆️ !! Modify this path to your actual file location !!
+        ```
+    > **⚠️ Important:** Before running DEFENDCLI for a specific scenario, ensure the `path` variable in `main()` correctly points to that scenario's `.json` file. Run the tool once per scenario file.
 
-## Rule Sets
+---
 
-For this Artifact Evaluation, the following two rule set files, containing selected attack signatures, are primarily used:
+##  Regeln (Rule Sets)
 
-* `cmd_linux.json`: Contains command and behavior signatures relevant to Linux environments.
-* `cmd_windows.json`: Contains command and behavior signatures relevant to Windows environments.
+For this Artifact Evaluation, DEFENDCLI primarily utilizes the following rule set files, which contain selected attack signatures:
 
-These rule sets are used by DEFENDCLI to detect potential malicious activities within the input data.
+* `cmd_linux.json`: Contains command and behavior signatures relevant to **Linux** environments.
+* `cmd_windows.json`: Contains command and behavior signatures relevant to **Windows** environments.
 
-## Output and GPT Analysis
+These files provide the logic DEFENDCLI uses to identify potentially malicious activities within the event data.
 
-* **Output File:** After execution, DEFENDCLI will generate a file named `InfoPath.json`. This file contains detected events, associated paths, or other analysis results.
-* **GPT Analysis:** The `InfoPath.json` file can be used as input for more advanced analysis, such as interpretation or summarization using large language models (like GPT).
-* **Privacy and API:**
-    * Due to privacy considerations, this tool does **not** include direct integration with GPT APIs.
-    * Users can choose to:
-        1.  Manually upload the generated `InfoPath.json` file to a GPT tool that supports file inputs (e.g., GPT-4o).
-        2.  Use their own OpenAI API keys to write custom scripts or modify the DEFENDCLI code to call the GPT API for analysis.
+## 📊 Output and Further Analysis
+
+* **Output File:** Upon successful execution, DEFENDCLI generates an output file named `InfoPath.json`. This file contains details about detected events, associated provenance paths, or other analysis results based on the activated rules.
+
+* **GPT / LLM Analysis:**
+    * The `InfoPath.json` file can serve as structured input for further analysis, interpretation, or summarization using Large Language Models (LLMs) like GPT.
+    * **Privacy & API Integration:**
+        > Due to privacy considerations and the need for user-specific API keys, this tool **does not** include direct, built-in integration with external LLM APIs (like OpenAI's GPT API).
+    * **User Options for LLM Analysis:**
+        1.  **Manual Upload:** You can manually upload the generated `InfoPath.json` file to an LLM interface that supports file uploads (e.g., the web interface for GPT-4o or similar models).
+        2.  **Custom Scripting:** You can use your own API keys (e.g., OpenAI API key) to write custom scripts that read `InfoPath.json` and interact with the desired LLM API. You could also modify the DEFENDCLI code yourself to add this functionality if preferred.
