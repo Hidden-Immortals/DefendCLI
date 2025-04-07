@@ -105,7 +105,3 @@ These rule sets are used by DEFENDCLI to detect potential malicious activities w
     * Users can choose to:
         1.  Manually upload the generated `InfoPath.json` file to a GPT tool that supports file inputs (e.g., GPT-4o).
         2.  Use their own OpenAI API keys to write custom scripts or modify the DEFENDCLI code to call the GPT API for analysis.
-
----
-
-Hope this more detailed and structured README is helpful!
